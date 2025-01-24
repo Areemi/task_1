@@ -1,40 +1,39 @@
+import logging
 
+logging.basicConfig(filename='app.log', level=logging.INFO)
 
 class Vehicle:
-    """Vehicle"""
     def __init__(self, brand, model):
-        self.__brand = brand
+        self._brand = brand
         self.model = model
 
     @property
     def brand(self):
-        return self.__brand
+        return self._brand
     
     @brand.setter
     def brand(self, brand):
         if isinstance(brand, str):
-            self.__brand = brand
+            self._brand = brand
         else:
-            print("Unexpected type")
-    
+            logging.error(f"Unexpected type! Expected type str, got {type(brand)}")
 
     def display_info(self):
-        print(f"Brand is a {self.__brand}. Model is a {self.__model}.")
+        print(f"Brand is a {self._brand}. Model is a {self.__model}.")
 
 
 class Car(Vehicle):
     def __init__(self, brand, model, num_doors):
-        Vehicle.__init__(self, brand, model)
+        super.__init__(self, brand, model)
         self.num_doors = num_doors
 
     def display_info(self):
-        super().__init__()
         print(f"Brand is a {self.brand}. Model is a {self.model}. Doors number is {self.num_doors}.")
 
 
 class Motorcycle(Vehicle):
     def __init__(self, brand, model, has_sidecar):
-        Vehicle.__init__(self, brand, model)
+        super.__init__(self, brand, model)
         self.has_sidecar = has_sidecar
 
     def display_info(self):
